@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Reyad - Web Developer & SEO Specialist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* NOTE FOR MULTI-PAGE SITES: 
+            In a real multi-page website, this <style> block should be in an 
+            external style.css file, linked in the <head> of each HTML page 
+            using <link rel="stylesheet" href="style.css">.
+            It's included here for completeness in this single-file immersive environment.
+        */
+        :root {
+            --bg-color: #0A0F14;
+            --card-bg-color: #101820;
+            --primary-accent-color: #00FFFF;
+            --primary-accent-hover: #00D1D1;
+            --secondary-accent-color: #1E293B;
+            --text-color-primary: #F0F8FF;
+            --text-color-secondary: #A0AEC0;
+            --border-color: #334155;
+            --font-primary: 'Poppins', sans-serif;
+            --font-secondary: 'Roboto Mono', monospace;
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color-primary);
+            font-family: var(--font-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--secondary-accent-color);
+            text-align: center;
+        }
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            color: var(--text-color-primary);
+        }
+
+        /* Shared style for main H1 on subpages and H2 section titles */
+        h2.section-title, h1.page-title { 
+            font-size: clamp(2.2rem, 5vw, 3rem);
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2.section-title::after, h1.page-title::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 4px;
+            background-color: var(--primary-accent-color);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+            box-shadow: 0 0 10px var(--primary-accent-color);
+        }
+
+        p {
+            color: var(--text-color-secondary);
+            max-width: 650px;
+            margin: 0 auto 25px;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+        }
+         .text-left p, .text-left ul, .text-left li { /* Helper class for left-aligned text */
+            text-align: left;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+
+        /* --- Buttons --- */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all var(--transition-speed) ease;
+            margin: 10px 5px;
+            border: 2px solid transparent;
+            letter-spacing: 0.5px;
+        }
+        .btn-primary {
+            background-color: var(--primary-accent-color);
+            color: var(--bg-color);
+            border-color: var(--primary-accent-color);
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.2);
+        }
+        .btn-primary:hover {
+            background-color: var(--primary-accent-hover);
+            border-color: var(--primary-accent-hover);
+            box-shadow: 0 6px 20px rgba(0, 255, 255, 0.4);
+            transform: translateY(-3px);
+        }
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-accent-color);
+            border-color: var(--primary-accent-color);
+        }
+        .btn-secondary:hover {
+            background-color: var(--primary-accent-color);
+            color: var(--bg-color);
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.2);
+        }
+
+        /* --- Header Navigation --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(10, 15, 20, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            border-bottom: 1px solid var(--secondary-accent-color);
+            transition: top 0.3s;
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-color-primary);
+            text-decoration: none;
+        }
+        .logo span { color: var(--primary-accent-color); }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+        nav a {
+            color: var(--text-color-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color var(--transition-speed);
+            padding: 5px 0;
+        }
+        nav a:hover, nav a.active {
+            color: var(--primary-accent-color);
+            border-bottom: 2px solid var(--primary-accent-color);
+        }
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-color-primary);
+            cursor: pointer;
+        }
+
+        /* --- Page Specific Hero/Title Section --- */
+        .page-header-section {
+            padding-top: 120px;
+            padding-bottom: 60px;
+            text-align: center;
+            background-color: var(--card-bg-color);
+        }
+        .page-header-section .page-subtitle {
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            color: var(--text-color-secondary);
+            font-family: var(--font-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* --- Services Page Content Styles --- */
+        #services-page-main-content {
+            padding: 60px 0;
+        }
+        .services-layout-container {
+            display: grid;
+            grid-template-columns: 1fr; /* Default to single column */
+            gap: 40px;
+            text-align: left; /* Override section center for grid items */
+        }
+
+        @media (min-width: 992px) { /* Adjust breakpoint for 2-column layout if needed */
+            .services-layout-container {
+                /* Example: 2/3 for main services, 1/3 for SEO/Support sidebar-like section */
+                /* grid-template-columns: 2fr 1fr;  */
+                /* Or keep it simple with auto-fit for more flexibility if items are similar */
+                 grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            }
+        }
+        
+        .service-card {
+            background-color: var(--card-bg-color);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--secondary-accent-color);
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15), 0 0 10px rgba(0, 255, 255, 0.05);
+        }
+
+        .service-card h3 {
+            color: var(--primary-accent-color);
+            font-family: var(--font-secondary);
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+        }
+         .service-card p {
+            margin-bottom: 15px;
+            text-align: left; /* Ensure p inside cards is left aligned */
+        }
+        .service-card p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .service-card ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 15px;
+        }
+        .service-card ul li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+            font-size: 1rem;
+            color: var(--text-color-secondary); /* Sub-items in secondary color */
+        }
+        .service-card ul li::before {
+            content: "✓"; /* Checkmark for sub-items */
+            color: var(--primary-accent-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        .service-card .emphasis { /* For "SEO is built-in..." */
+            display: block;
+            margin-top: 20px;
+            font-weight: 600;
+            color: var(--text-color-primary);
+            text-align: center;
+            font-style: italic;
+        }
+
+
+        /* --- Footer --- */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid var(--secondary-accent-color);
+        }
+        .copyright {
+            font-size: 0.9rem;
+            color: var(--text-color-secondary);
+            margin-top: 20px;
+        }
+
+        /* --- Scroll to Top Button --- */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary-accent-color);
+            color: var(--bg-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity var(--transition-speed), visibility var(--transition-speed), transform var(--transition-speed);
+            z-index: 999;
+            box-shadow: 0 0 15px var(--primary-accent-color);
+        }
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .scroll-to-top:hover {
+            background-color: var(--primary-accent-hover);
+            transform: scale(1.1) translateY(0);
+        }
+
+        /* --- Animation Classes for JS --- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Responsive Design Adjustments --- */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 20px;
+            }
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--card-bg-color);
+                padding: 20px 0;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+            }
+            nav ul.active {
+                display: flex;
+            }
+            nav ul li {
+                text-align: center;
+                margin: 10px 0;
+            }
+            .menu-toggle {
+                display: block;
+            }
+             .services-layout-container { /* Ensure it stacks on smaller screens */
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header id="main-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">REYAD<span>.</span></a>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+            <nav>
+                <ul id="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header-section fade-in">
+            <div class="container">
+                <h1 class="page-title">My Services</h1>
+                <p class="page-subtitle">Delivering high-quality web solutions tailored to your needs.</p>
+            </div>
+        </section>
+
+        <section id="services-page-main-content">
+            <div class="container">
+                <h2 class="section-title fade-in">What I Offer</h2>
+                <div class="services-layout-container">
+                    <div class="service-card fade-in">
+                        <h3>Web Development</h3>
+                        <p>Custom WordPress or Next.js websites tailored for performance, speed, and SEO. Every project is mobile-ready and optimized for best practices, ensuring a seamless experience across all devices.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <h3>WooCommerce Stores</h3>
+                        <p>I help brands launch scalable online shops. From single-product setups to complex catalog systems with custom features — your eCommerce business will be ready to grow and succeed in the competitive online market.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <h3>WordPress Customization</h3>
+                        <p>Need a unique feature, a plugin tweak, or a complete theme overhaul? I can modify existing themes and plugins, or build custom functionality from the ground up that fits your site perfectly and enhances user engagement.</p>
+                    </div>
+                    <div class="service-card fade-in">
+                        <h3>SEO Services</h3>
+                        <p>Comprehensive SEO solutions to boost your online presence:</p>
+                        <ul>
+                            <li>Site Audit & Analysis</li>
+                            <li>Keyword Research & Setup</li>
+                            <li>Technical SEO Optimization</li>
+                            <li>On-Page & Off-Page Strategies</li>
+                            <li>Content Strategy Guidance</li>
+                            <li>Speed Enhancements & Core Web Vitals</li>
+                            <li>Rank Tracking & Reporting</li>
+                        </ul>
+                        <span class="emphasis">SEO is built-in, not an afterthought.</span>
+                    </div>
+                    <div class="service-card fade-in">
+                        <h3>Support & Maintenance</h3>
+                        <p>Websites require ongoing care. I offer flexible support and maintenance plans to keep your site up-to-date, secure, fast, and performing optimally. This includes regular backups, security monitoring, plugin/theme updates, and performance checks — because websites aren’t “set it and forget it.”</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <p class="copyright">&copy; <span id="currentYear"></span> Reyad. All Rights Reserved. Built with passion.</p>
+        </div>
+    </footer>
+
+    <a href="#" class="scroll-to-top" aria-label="Scroll to top">&#8679;</a>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Smooth Scroll for on-page # links (like scroll-to-top) ---
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href.length > 1 && document.querySelector(href)) { 
+                        e.preventDefault();
+                        document.querySelector(href).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    } else if (href === "#") {
+                         e.preventDefault();
+                         window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // --- Active Nav Link Highlighting for Multi-Page ---
+            const navLinks = document.querySelectorAll('#nav-links a');
+            const currentPage = window.location.pathname.split("/").pop() || "index.html"; 
+
+            navLinks.forEach(link => {
+                const linkPage = link.getAttribute('href').split("/").pop();
+                if (linkPage === currentPage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+
+            // --- Fade-in Elements on Scroll ---
+            const fadeInElements = document.querySelectorAll('.fade-in');
+            if (typeof IntersectionObserver !== 'undefined') {
+                const observerOptions = {
+                    root: null,
+                    rootMargin: '0px',
+                    threshold: 0.1
+                };
+                const observer = new IntersectionObserver((entries, observerRef) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observerRef.unobserve(entry.target);
+                        }
+                    });
+                }, observerOptions);
+                fadeInElements.forEach(el => {
+                    observer.observe(el);
+                });
+            } else {
+                fadeInElements.forEach(el => el.classList.add('is-visible'));
+            }
+
+            // --- Scroll to Top Button Visibility ---
+            const scrollToTopBtn = document.querySelector('.scroll-to-top');
+            if (scrollToTopBtn) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 300) {
+                        scrollToTopBtn.classList.add('visible');
+                    } else {
+                        scrollToTopBtn.classList.remove('visible');
+                    }
+                });
+            }
+
+            // --- Sticky Header Hide/Show on Scroll ---
+            let lastScrollTop = 0;
+            const header = document.getElementById('main-header');
+            if (header) {
+                window.addEventListener('scroll', function() {
+                    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight + 50) {
+                        header.style.top = `-${header.offsetHeight}px`;
+                    } else {
+                        header.style.top = '0';
+                    }
+                    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+                });
+            }
+
+            // --- Mobile Menu Toggle ---
+            const menuToggle = document.getElementById('menu-toggle');
+            const navLinksUl = document.getElementById('nav-links');
+            if(menuToggle && navLinksUl) {
+                menuToggle.addEventListener('click', () => {
+                    navLinksUl.classList.toggle('active');
+                    const isExpanded = navLinksUl.classList.contains('active');
+                    menuToggle.setAttribute('aria-expanded', isExpanded);
+                    menuToggle.innerHTML = isExpanded ? '&times;' : '&#9776;'; 
+                });
+                navLinksUl.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (navLinksUl.classList.contains('active')) {
+                            navLinksUl.classList.remove('active');
+                            menuToggle.setAttribute('aria-expanded', 'false');
+                            menuToggle.innerHTML = '&#9776;';
+                        }
+                    });
+                });
+            }
+
+            // --- Update Copyright Year ---
+            const currentYearSpan = document.getElementById('currentYear');
+            if (currentYearSpan) {
+                currentYearSpan.textContent = new Date().getFullYear();
+            }
+        });
+    </script>
+</body>
+</html>

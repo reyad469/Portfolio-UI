@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Reyad - Web Developer & SEO Specialist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome for icons -->
+    <style>
+        /* NOTE FOR MULTI-PAGE SITES: 
+            In a real multi-page website, this <style> block should be in an 
+            external style.css file, linked in the <head> of each HTML page.
+        */
+        :root {
+            --bg-color: #0A0F14;
+            --card-bg-color: #101820;
+            --primary-accent-color: #00FFFF; /* Vibrant Cyan */
+            --primary-accent-hover: #00D1D1;
+            --secondary-accent-color: #1E293B;
+            --text-color-primary: #F0F8FF;
+            --text-color-secondary: #A0AEC0;
+            --border-color: #334155;
+            --input-border-color: #4A5568; /* Slightly lighter for input borders */
+            --font-primary: 'Poppins', sans-serif;
+            --font-secondary: 'Roboto Mono', monospace;
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color-primary);
+            font-family: var(--font-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--secondary-accent-color);
+            text-align: center;
+        }
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            color: var(--text-color-primary);
+        }
+
+        h2.section-title, h1.page-title { 
+            font-size: clamp(2.2rem, 5vw, 3rem);
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2.section-title::after, h1.page-title::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 4px;
+            background-color: var(--primary-accent-color);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+            box-shadow: 0 0 10px var(--primary-accent-color);
+        }
+
+        p {
+            color: var(--text-color-secondary);
+            max-width: 650px;
+            margin: 0 auto 25px;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+        }
+         .text-left p, .text-left ul, .text-left li {
+            text-align: left;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all var(--transition-speed) ease;
+            margin: 10px 5px;
+            border: 2px solid transparent;
+            letter-spacing: 0.5px;
+            cursor: pointer; /* Ensure buttons have pointer cursor */
+        }
+        .btn-primary {
+            background-color: var(--primary-accent-color);
+            color: var(--bg-color);
+            border-color: var(--primary-accent-color);
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.2);
+        }
+        .btn-primary:hover {
+            background-color: var(--primary-accent-hover);
+            border-color: var(--primary-accent-hover);
+            box-shadow: 0 6px 20px rgba(0, 255, 255, 0.4);
+            transform: translateY(-3px);
+        }
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-accent-color);
+            border-color: var(--primary-accent-color);
+        }
+        .btn-secondary:hover {
+            background-color: var(--primary-accent-color);
+            color: var(--bg-color);
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.2);
+        }
+
+        /* --- Header Navigation --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(10, 15, 20, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            border-bottom: 1px solid var(--secondary-accent-color);
+            transition: top 0.3s;
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-color-primary);
+            text-decoration: none;
+        }
+        .logo span { color: var(--primary-accent-color); }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+        nav a {
+            color: var(--text-color-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color var(--transition-speed);
+            padding: 5px 0;
+        }
+        nav a:hover, nav a.active {
+            color: var(--primary-accent-color);
+            border-bottom: 2px solid var(--primary-accent-color);
+        }
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-color-primary);
+            cursor: pointer;
+        }
+
+        /* --- Page Specific Hero/Title Section --- */
+        .page-header-section {
+            padding-top: 120px;
+            padding-bottom: 60px;
+            text-align: center;
+            background-color: var(--card-bg-color);
+        }
+        .page-header-section .page-subtitle {
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            color: var(--text-color-secondary);
+            font-family: var(--font-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* --- Contact Page Content Styles --- */
+        #contact-page-main-content {
+            padding: 60px 0;
+        }
+        .contact-layout-container {
+            display: grid;
+            grid-template-columns: 1fr; /* Default single column */
+            gap: 50px;
+            align-items: flex-start; /* Align items to the top */
+        }
+        @media (min-width: 992px) {
+            .contact-layout-container {
+                grid-template-columns: 1.5fr 1fr; /* Form takes more space */
+            }
+        }
+
+        .contact-form-area, .contact-info-area {
+            background-color: var(--card-bg-color);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--secondary-accent-color);
+            text-align: left;
+        }
+        .contact-form-area h3, .contact-info-area h3 {
+            font-size: 1.8rem;
+            color: var(--primary-accent-color);
+            margin-bottom: 25px;
+            font-family: var(--font-secondary);
+        }
+
+        /* Contact Form Styles */
+        .contact-form .form-group {
+            margin-bottom: 20px;
+        }
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-color-secondary);
+        }
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid var(--input-border-color);
+            background-color: var(--bg-color); /* Darker background for inputs */
+            color: var(--text-color-primary);
+            font-family: var(--font-primary);
+            font-size: 1rem;
+            transition: border-color var(--transition-speed);
+        }
+        .contact-form input[type="text"]:focus,
+        .contact-form input[type="email"]:focus,
+        .contact-form textarea:focus {
+            border-color: var(--primary-accent-color);
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 255, 255, 0.2);
+        }
+        .contact-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        .contact-form .btn-primary { /* Ensure button styles are applied if it's part of the form */
+            width: auto; /* Or 100% if desired */
+            padding: 12px 35px; /* Slightly more padding for submit */
+        }
+        /* Simple placeholder for embedded form message */
+        .form-embed-placeholder {
+            border: 2px dashed var(--secondary-accent-color);
+            padding: 40px;
+            text-align: center;
+            color: var(--text-color-secondary);
+            border-radius: 8px;
+        }
+        .form-embed-placeholder p {
+            margin-bottom: 0;
+        }
+
+
+        /* Contact Info Area Styles */
+        .contact-info-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .contact-info-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+        .contact-info-list li i { /* Font Awesome Icons */
+            font-size: 1.5rem;
+            color: var(--primary-accent-color);
+            margin-right: 15px;
+            width: 25px; /* Fixed width for icon alignment */
+            text-align: center;
+        }
+        .contact-info-list li a {
+            color: var(--text-color-secondary);
+            text-decoration: none;
+            transition: color var(--transition-speed);
+        }
+        .contact-info-list li a:hover {
+            color: var(--primary-accent-color);
+        }
+
+        /* Social Links */
+        .social-links-area {
+            margin-top: 30px;
+        }
+        .social-links-area h4 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--text-color-primary);
+        }
+        .social-icons {
+            display: flex;
+            gap: 20px;
+        }
+        .social-icons a {
+            color: var(--text-color-secondary);
+            font-size: 1.8rem; /* Larger icons */
+            transition: color var(--transition-speed), transform var(--transition-speed);
+        }
+        .social-icons a:hover {
+            color: var(--primary-accent-color);
+            transform: scale(1.1);
+        }
+
+        .response-time-note p {
+            margin-top: 30px;
+            font-style: italic;
+            font-size: 0.9em;
+            text-align: left;
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid var(--secondary-accent-color);
+        }
+        .copyright {
+            font-size: 0.9rem;
+            color: var(--text-color-secondary);
+            margin-top: 20px;
+        }
+
+        /* --- Scroll to Top Button --- */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary-accent-color);
+            color: var(--bg-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity var(--transition-speed), visibility var(--transition-speed), transform var(--transition-speed);
+            z-index: 999;
+            box-shadow: 0 0 15px var(--primary-accent-color);
+        }
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .scroll-to-top:hover {
+            background-color: var(--primary-accent-hover);
+            transform: scale(1.1) translateY(0);
+        }
+
+        /* --- Animation Classes for JS --- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Responsive Design Adjustments --- */
+         @media (max-width: 991px) { /* Adjust breakpoint where contact layout stacks */
+            .contact-layout-container {
+                grid-template-columns: 1fr;
+            }
+            .contact-info-area {
+                margin-top: 0; /* No margin needed if stacked, already gapped */
+            }
+        }
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 20px;
+            }
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--card-bg-color);
+                padding: 20px 0;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+            }
+            nav ul.active {
+                display: flex;
+            }
+            nav ul li {
+                text-align: center;
+                margin: 10px 0;
+            }
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header id="main-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">REYAD<span>.</span></a>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+            <nav>
+                <ul id="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header-section fade-in">
+            <div class="container">
+                <h1 class="page-title">Get In Touch</h1>
+                <p class="page-subtitle">Have a question, a project idea, or just want to say hi? I'd love to hear from you.</p>
+            </div>
+        </section>
+
+        <section id="contact-page-main-content">
+            <div class="container">
+                <p class="text-left fade-in" style="max-width: none; margin-bottom: 40px;">Have a question? A project idea? Let’s make it real. Fill the form or reach out directly.</p>
+                <div class="contact-layout-container">
+                    <div class="contact-form-area fade-in">
+                        <h3>Send Me a Message</h3>
+                        <!-- 
+                            Note: For a functional form, you'll need backend processing 
+                            or a service like Formspree, Netlify Forms, etc.
+                            This is a static HTML structure. 
+                            If using Contact Form 7 or similar with WordPress, you'd embed its shortcode.
+                        -->
+                        <form action="#" method="POST" class="contact-form" id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Your Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Your Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" name="subject">
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Your Message</label>
+                                <textarea id="message" name="message" rows="6" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                        <!-- <div class="form-embed-placeholder">
+                            <p>(Your Contact Form 7 or similar form will be embedded here)</p>
+                        </div> -->
+                         <div id="form-submission-message" style="margin-top: 20px; padding: 10px; border-radius: 5px; display: none;"></div>
+                    </div>
+
+                    <div class="contact-info-area fade-in">
+                        <h3>Direct Info</h3>
+                        <ul class="contact-info-list">
+                            <li><i class="fas fa-envelope"></i> <a href="mailto:your.email@example.com">your.email@example.com</a></li>
+                            <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/yourphonenumber" target="_blank">WhatsApp Me (Your Number)</a></li>
+                            <li><i class="fas fa-map-marker-alt"></i> Available Worldwide (Remote)</li>
+                        </ul>
+
+                        <div class="social-links-area">
+                            <h4>Let’s Connect</h4>
+                            <div class="social-icons">
+                                <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                                <a href="#" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                                <a href="#" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                                <!-- Add other social links as needed -->
+                            </div>
+                        </div>
+                        <div class="response-time-note">
+                            <p>I usually reply within 24 hours. Looking forward to hearing from you!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <p class="copyright">&copy; <span id="currentYear"></span> Reyad. All Rights Reserved. Built with passion.</p>
+        </div>
+    </footer>
+
+    <a href="#" class="scroll-to-top" aria-label="Scroll to top">&#8679;</a>
+
+    <script>
+        // NOTE FOR MULTI-PAGE SITES: 
+        // This <script> block can also be in an external script.js file.
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Smooth Scroll for on-page # links ---
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href.length > 1 && document.querySelector(href)) { 
+                        e.preventDefault();
+                        document.querySelector(href).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    } else if (href === "#") {
+                         e.preventDefault();
+                         window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // --- Active Nav Link Highlighting ---
+            const navLinks = document.querySelectorAll('#nav-links a');
+            const currentPage = window.location.pathname.split("/").pop() || "index.html"; 
+            navLinks.forEach(link => {
+                const linkPage = link.getAttribute('href').split("/").pop();
+                if (linkPage === currentPage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+
+            // --- Fade-in Elements on Scroll ---
+            const fadeInElements = document.querySelectorAll('.fade-in');
+            if (typeof IntersectionObserver !== 'undefined') {
+                const observerOptions = {
+                    root: null,
+                    rootMargin: '0px',
+                    threshold: 0.1
+                };
+                const observer = new IntersectionObserver((entries, observerRef) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observerRef.unobserve(entry.target);
+                        }
+                    });
+                }, observerOptions);
+                fadeInElements.forEach(el => {
+                    observer.observe(el);
+                });
+            } else {
+                fadeInElements.forEach(el => el.classList.add('is-visible'));
+            }
+
+            // --- Scroll to Top Button Visibility ---
+            const scrollToTopBtn = document.querySelector('.scroll-to-top');
+            if (scrollToTopBtn) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 300) {
+                        scrollToTopBtn.classList.add('visible');
+                    } else {
+                        scrollToTopBtn.classList.remove('visible');
+                    }
+                });
+            }
+
+            // --- Sticky Header Hide/Show on Scroll ---
+            let lastScrollTop = 0;
+            const header = document.getElementById('main-header');
+            if (header) {
+                window.addEventListener('scroll', function() {
+                    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight + 50) {
+                        header.style.top = `-${header.offsetHeight}px`;
+                    } else {
+                        header.style.top = '0';
+                    }
+                    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+                });
+            }
+
+            // --- Mobile Menu Toggle ---
+            const menuToggle = document.getElementById('menu-toggle');
+            const navLinksUl = document.getElementById('nav-links');
+            if(menuToggle && navLinksUl) {
+                menuToggle.addEventListener('click', () => {
+                    navLinksUl.classList.toggle('active');
+                    const isExpanded = navLinksUl.classList.contains('active');
+                    menuToggle.setAttribute('aria-expanded', isExpanded);
+                    menuToggle.innerHTML = isExpanded ? '&times;' : '&#9776;'; 
+                });
+                navLinksUl.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (navLinksUl.classList.contains('active')) {
+                            navLinksUl.classList.remove('active');
+                            menuToggle.setAttribute('aria-expanded', 'false');
+                            menuToggle.innerHTML = '&#9776;';
+                        }
+                    });
+                });
+            }
+            
+            // --- Basic Contact Form Submission Message (Placeholder) ---
+            const contactForm = document.getElementById('contactForm');
+            const formSubmissionMessage = document.getElementById('form-submission-message');
+
+            if (contactForm && formSubmissionMessage) {
+                contactForm.addEventListener('submit', function(event) {
+                    event.preventDefault(); // Prevent actual form submission for this static example
+
+                    // Simulate form processing
+                    formSubmissionMessage.textContent = 'Sending your message...';
+                    formSubmissionMessage.style.display = 'block';
+                    formSubmissionMessage.style.backgroundColor = 'var(--secondary-accent-color)';
+                    formSubmissionMessage.style.color = 'var(--text-color-secondary)';
+
+
+                    setTimeout(() => {
+                        // Simulate a success response
+                        formSubmissionMessage.textContent = 'Thank you! Your message has been sent. I will get back to you soon.';
+                        formSubmissionMessage.style.backgroundColor = 'var(--primary-accent-color)';
+                        formSubmissionMessage.style.color = 'var(--bg-color)';
+                        contactForm.reset(); // Clear the form
+
+                        // Hide the message after a few seconds
+                        setTimeout(() => {
+                            formSubmissionMessage.style.display = 'none';
+                        }, 5000);
+
+                    }, 2000); // Simulate 2 seconds delay
+                });
+            }
+
+
+            // --- Update Copyright Year ---
+            const currentYearSpan = document.getElementById('currentYear');
+            if (currentYearSpan) {
+                currentYearSpan.textContent = new Date().getFullYear();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Reyad - Web Developer & SEO Specialist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* NOTE FOR MULTI-PAGE SITES: 
+            In a real multi-page website, this <style> block should be in an 
+            external style.css file, linked in the <head> of each HTML page 
+            using <link rel="stylesheet" href="style.css">.
+            It's included here for completeness in this single-file immersive environment.
+        */
+        :root {
+            --bg-color: #0A0F14;
+            --card-bg-color: #101820;
+            --primary-accent-color: #00FFFF;
+            --primary-accent-hover: #00D1D1;
+            --secondary-accent-color: #1E293B;
+            --text-color-primary: #F0F8FF;
+            --text-color-secondary: #A0AEC0;
+            --border-color: #334155;
+            --font-primary: 'Poppins', sans-serif;
+            --font-secondary: 'Roboto Mono', monospace;
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color-primary);
+            font-family: var(--font-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--secondary-accent-color);
+            text-align: center;
+        }
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            color: var(--text-color-primary);
+        }
+
+        /* Shared style for main H1 on subpages and H2 section titles */
+        h2.section-title, h1.page-title { 
+            font-size: clamp(2.2rem, 5vw, 3rem);
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2.section-title::after, h1.page-title::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 4px;
+            background-color: var(--primary-accent-color);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+            box-shadow: 0 0 10px var(--primary-accent-color);
+        }
+
+        p {
+            color: var(--text-color-secondary);
+            max-width: 650px;
+            margin: 0 auto 25px;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+        }
+         .text-left p, .text-left ul, .text-left li { /* Helper class for left-aligned text */
+            text-align: left;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+
+        /* --- Buttons --- */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all var(--transition-speed) ease;
+            margin: 10px 5px;
+            border: 2px solid transparent;
+            letter-spacing: 0.5px;
+        }
+        .btn-primary {
+            background-color: var(--primary-accent-color);
+            color: var(--bg-color);
+            border-color: var(--primary-accent-color);
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.2);
+        }
+        .btn-primary:hover {
+            background-color: var(--primary-accent-hover);
+            border-color: var(--primary-accent-hover);
+            box-shadow: 0 6px 20px rgba(0, 255, 255, 0.4);
+            transform: translateY(-3px);
+        }
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-accent-color);
+            border-color: var(--primary-accent-color);
+        }
+        .btn-secondary:hover {
+            background-color: var(--primary-accent-color);
+            color: var(--bg-color);
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.2);
+        }
+
+        /* --- Header Navigation --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(10, 15, 20, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            border-bottom: 1px solid var(--secondary-accent-color);
+            transition: top 0.3s;
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-color-primary);
+            text-decoration: none;
+        }
+        .logo span { color: var(--primary-accent-color); }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+        nav a {
+            color: var(--text-color-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color var(--transition-speed);
+            padding: 5px 0;
+        }
+        nav a:hover, nav a.active {
+            color: var(--primary-accent-color);
+            border-bottom: 2px solid var(--primary-accent-color);
+        }
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-color-primary);
+            cursor: pointer;
+        }
+
+        /* --- Page Specific Hero/Title Section --- */
+        .page-header-section {
+            padding-top: 120px;
+            padding-bottom: 60px;
+            text-align: center;
+            background-color: var(--card-bg-color);
+        }
+        .page-header-section .page-subtitle {
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            color: var(--text-color-secondary);
+            font-family: var(--font-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* --- Projects Page Content Styles --- */
+        #projects-page-main-content {
+            padding: 60px 0;
+        }
+        .projects-grid { /* Re-using project-grid class name might be fine, or make specific if needed */
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px; /* Increased gap */
+            margin-top: 30px;
+        }
+        
+        .project-showcase-card {
+            background-color: var(--card-bg-color);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--secondary-accent-color);
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+            display: flex;
+            flex-direction: column; /* Ensure content flows top to bottom */
+            text-align: left; /* Override section center */
+        }
+        .project-showcase-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.25), 0 0 20px rgba(0, 255, 255, 0.08);
+        }
+        .project-image-actual { /* For actual <img> tags */
+            width: 100%;
+            height: 250px; /* Or use aspect-ratio css if images vary */
+            object-fit: cover; /* Cover ensures image fills space without distortion */
+            border-bottom: 1px solid var(--secondary-accent-color);
+        }
+        .project-image-placeholder { /* Fallback if no image */
+             width: 100%;
+            height: 250px;
+            background-color: var(--secondary-accent-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-color-secondary);
+            font-family: var(--font-secondary);
+            border-bottom: 1px solid var(--secondary-accent-color);
+        }
+        .project-details {
+            padding: 25px;
+            flex-grow: 1; /* Allows this part to take remaining space if card height varies */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; /* Pushes links to bottom if content is short */
+        }
+        .project-details h3 {
+            font-size: 1.5rem; /* Larger title for project cards */
+            color: var(--primary-accent-color);
+            margin-bottom: 10px;
+        }
+        .project-details p { /* Project description */
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            text-align: left; /* Ensure p is left aligned */
+        }
+        .project-tech-tags {
+            margin-bottom: 20px;
+        }
+        .project-tech-tag {
+            display: inline-block;
+            background-color: var(--secondary-accent-color);
+            color: var(--text-color-secondary);
+            font-size: 0.8rem;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            font-family: var(--font-secondary);
+        }
+        .project-card-links a {
+            color: var(--primary-accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            margin-right: 20px;
+            transition: color var(--transition-speed);
+        }
+        .project-card-links a:hover {
+            color: var(--primary-accent-hover);
+            text-decoration: underline;
+        }
+        .project-status-note { /* For "(Coming soon...)" */
+            display: block;
+            font-style: italic;
+            color: var(--text-color-secondary);
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        /* Section for "Project Inquiries" */
+        .project-inquiry-section {
+            background-color: var(--card-bg-color);
+            border-radius: 12px;
+            padding: 50px 30px;
+            margin-top: 60px; /* Space it out */
+            text-align: center;
+        }
+        .project-inquiry-section h3 {
+            font-size: 1.8rem;
+            color: var(--text-color-primary);
+            margin-bottom: 15px;
+        }
+        .project-inquiry-section p {
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+
+        /* --- Footer --- */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid var(--secondary-accent-color);
+        }
+        .copyright {
+            font-size: 0.9rem;
+            color: var(--text-color-secondary);
+            margin-top: 20px;
+        }
+
+        /* --- Scroll to Top Button --- */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary-accent-color);
+            color: var(--bg-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity var(--transition-speed), visibility var(--transition-speed), transform var(--transition-speed);
+            z-index: 999;
+            box-shadow: 0 0 15px var(--primary-accent-color);
+        }
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .scroll-to-top:hover {
+            background-color: var(--primary-accent-hover);
+            transform: scale(1.1) translateY(0);
+        }
+
+        /* --- Animation Classes for JS --- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Responsive Design Adjustments --- */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 20px;
+            }
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--card-bg-color);
+                padding: 20px 0;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+            }
+            nav ul.active {
+                display: flex;
+            }
+            nav ul li {
+                text-align: center;
+                margin: 10px 0;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .projects-grid { /* Ensure it stacks on smaller screens */
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header id="main-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">REYAD<span>.</span></a>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+            <nav>
+                <ul id="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header-section fade-in">
+            <div class="container">
+                <h1 class="page-title">My Projects</h1>
+                <p class="page-subtitle">A showcase of my work and capabilities in web development and design.</p>
+            </div>
+        </section>
+
+        <section id="projects-page-main-content">
+            <div class="container">
+                <h2 class="section-title fade-in">Featured Work</h2>
+                <div class="projects-grid">
+                    <div class="project-showcase-card fade-in">
+                        <!-- Replace with actual image: <img src="path/to/reboot10-image.jpg" alt="Reboot10 Fashion eCommerce" class="project-image-actual"> -->
+                        <div class="project-image-placeholder">Reboot10 Image</div>
+                        <div class="project-details">
+                            <div>
+                                <h3>Reboot10 – Fashion eCommerce</h3>
+                                <p>WooCommerce site with stylish product pages, fast loading time, and integrated SEO. Designed for modern men’s fashion, focusing on user experience and conversion.</p>
+                                <div class="project-tech-tags">
+                                    <span class="project-tech-tag">WooCommerce</span>
+                                    <span class="project-tech-tag">WordPress</span>
+                                    <span class="project-tech-tag">SEO</span>
+                                    <span class="project-tech-tag">PHP</span>
+                                    <span class="project-tech-tag">Elementor</span>
+                                </div>
+                            </div>
+                            <div class="project-card-links">
+                                <a href="#" target="_blank">View Live Site</a>
+                                <a href="#" target="_blank">Case Study</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-showcase-card fade-in">
+                        <div class="project-image-placeholder">Trading Course Image</div>
+                        <div class="project-details">
+                            <div>
+                                <h3>Trading Course – Landing Page</h3>
+                                <p>Clean, CTA-focused landing page for a course in the financial space. Designed to convert, with WhatsApp integration and mobile-first layout for optimal lead generation.</p>
+                                 <div class="project-tech-tags">
+                                    <span class="project-tech-tag">HTML5</span>
+                                    <span class="project-tech-tag">CSS3</span>
+                                    <span class="project-tech-tag">JavaScript</span>
+                                    <span class="project-tech-tag">Responsive Design</span>
+                                </div>
+                            </div>
+                            <div class="project-card-links">
+                                <a href="#" target="_blank">View Landing Page</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-showcase-card fade-in">
+                         <div class="project-image-placeholder">CodemasterIt Image</div>
+                        <div class="project-details">
+                            <div>
+                                <h3>CodemasterIt – Business Tech Services</h3>
+                                <p>Currently building this project with Next.js. It will serve as a B2B services hub offering web, eCommerce, and SEO solutions to a variety of businesses.</p>
+                                <div class="project-tech-tags">
+                                    <span class="project-tech-tag">Next.js</span>
+                                    <span class="project-tech-tag">React</span>
+                                    <span class="project-tech-tag">Tailwind CSS</span>
+                                    <span class="project-tech-tag">Headless CMS</span>
+                                </div>
+                                <span class="project-status-note">(Coming Soon)</span>
+                            </div>
+                             <div class="project-card-links" style="margin-top: 15px;"> <!-- Add margin if no tags push it down -->
+                                <a href="#" target="_blank">Preview (Soon)</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-showcase-card fade-in">
+                        <div class="project-image-placeholder">Other Client Work Image</div>
+                        <div class="project-details">
+                           <div>
+                                <h3>Other Client Work</h3>
+                                <p>Details about various other client projects, collaborations, and smaller freelance tasks will be added here soon. Stay tuned for more examples of custom solutions!</p>
+                                <span class="project-status-note">(Coming soon – Add real client projects or collaborations once available.)</span>
+                           </div>
+                           <div class="project-card-links" style="margin-top: 15px;">
+                                <!-- Links can be added when content is ready -->
+                           </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-inquiry-section fade-in">
+                    <h3>Project Inquiries</h3>
+                    <p>Looking for something similar or have a unique idea? Let’s talk about your project requirements and how I can help you achieve your online goals.</p>
+                    <a href="contact.html" class="btn btn-primary">Start Your Project</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <p class="copyright">&copy; <span id="currentYear"></span> Reyad. All Rights Reserved. Built with passion.</p>
+        </div>
+    </footer>
+
+    <a href="#" class="scroll-to-top" aria-label="Scroll to top">&#8679;</a>
+
+    <script>
+        // NOTE FOR MULTI-PAGE SITES: 
+        // This <script> block can also be in an external script.js file.
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Smooth Scroll for on-page # links ---
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href.length > 1 && document.querySelector(href)) { 
+                        e.preventDefault();
+                        document.querySelector(href).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    } else if (href === "#") {
+                         e.preventDefault();
+                         window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // --- Active Nav Link Highlighting ---
+            const navLinks = document.querySelectorAll('#nav-links a');
+            const currentPage = window.location.pathname.split("/").pop() || "index.html"; 
+            navLinks.forEach(link => {
+                const linkPage = link.getAttribute('href').split("/").pop();
+                if (linkPage === currentPage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+
+            // --- Fade-in Elements on Scroll ---
+            const fadeInElements = document.querySelectorAll('.fade-in');
+            if (typeof IntersectionObserver !== 'undefined') {
+                const observerOptions = {
+                    root: null,
+                    rootMargin: '0px',
+                    threshold: 0.1
+                };
+                const observer = new IntersectionObserver((entries, observerRef) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observerRef.unobserve(entry.target);
+                        }
+                    });
+                }, observerOptions);
+                fadeInElements.forEach(el => {
+                    observer.observe(el);
+                });
+            } else {
+                fadeInElements.forEach(el => el.classList.add('is-visible'));
+            }
+
+            // --- Scroll to Top Button Visibility ---
+            const scrollToTopBtn = document.querySelector('.scroll-to-top');
+            if (scrollToTopBtn) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 300) {
+                        scrollToTopBtn.classList.add('visible');
+                    } else {
+                        scrollToTopBtn.classList.remove('visible');
+                    }
+                });
+            }
+
+            // --- Sticky Header Hide/Show on Scroll ---
+            let lastScrollTop = 0;
+            const header = document.getElementById('main-header');
+            if (header) {
+                window.addEventListener('scroll', function() {
+                    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight + 50) {
+                        header.style.top = `-${header.offsetHeight}px`;
+                    } else {
+                        header.style.top = '0';
+                    }
+                    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+                });
+            }
+
+            // --- Mobile Menu Toggle ---
+            const menuToggle = document.getElementById('menu-toggle');
+            const navLinksUl = document.getElementById('nav-links');
+            if(menuToggle && navLinksUl) {
+                menuToggle.addEventListener('click', () => {
+                    navLinksUl.classList.toggle('active');
+                    const isExpanded = navLinksUl.classList.contains('active');
+                    menuToggle.setAttribute('aria-expanded', isExpanded);
+                    menuToggle.innerHTML = isExpanded ? '&times;' : '&#9776;'; 
+                });
+                navLinksUl.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (navLinksUl.classList.contains('active')) {
+                            navLinksUl.classList.remove('active');
+                            menuToggle.setAttribute('aria-expanded', 'false');
+                            menuToggle.innerHTML = '&#9776;';
+                        }
+                    });
+                });
+            }
+
+            // --- Update Copyright Year ---
+            const currentYearSpan = document.getElementById('currentYear');
+            if (currentYearSpan) {
+                currentYearSpan.textContent = new Date().getFullYear();
+            }
+        });
+    </script>
+</body>
+</html>

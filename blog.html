@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Reyad - Web Developer & SEO Specialist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* NOTE FOR MULTI-PAGE SITES: 
+            In a real multi-page website, this <style> block should be in an 
+            external style.css file, linked in the <head> of each HTML page 
+            using <link rel="stylesheet" href="style.css">.
+        */
+        :root {
+            --bg-color: #0A0F14;
+            --card-bg-color: #101820;
+            --primary-accent-color: #00FFFF;
+            --primary-accent-hover: #00D1D1;
+            --secondary-accent-color: #1E293B;
+            --text-color-primary: #F0F8FF;
+            --text-color-secondary: #A0AEC0;
+            --border-color: #334155;
+            --font-primary: 'Poppins', sans-serif;
+            --font-secondary: 'Roboto Mono', monospace;
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color-primary);
+            font-family: var(--font-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--secondary-accent-color);
+            text-align: center;
+        }
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            color: var(--text-color-primary);
+        }
+
+        h2.section-title, h1.page-title { 
+            font-size: clamp(2.2rem, 5vw, 3rem);
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2.section-title::after, h1.page-title::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 4px;
+            background-color: var(--primary-accent-color);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+            box-shadow: 0 0 10px var(--primary-accent-color);
+        }
+
+        p {
+            color: var(--text-color-secondary);
+            max-width: 650px;
+            margin: 0 auto 25px;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+        }
+         .text-left p, .text-left ul, .text-left li {
+            text-align: left;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        /* --- Buttons --- */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all var(--transition-speed) ease;
+            margin: 10px 5px;
+            border: 2px solid transparent;
+            letter-spacing: 0.5px;
+        }
+        .btn-primary {
+            background-color: var(--primary-accent-color);
+            color: var(--bg-color);
+            border-color: var(--primary-accent-color);
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.2);
+        }
+        .btn-primary:hover {
+            background-color: var(--primary-accent-hover);
+            border-color: var(--primary-accent-hover);
+            box-shadow: 0 6px 20px rgba(0, 255, 255, 0.4);
+            transform: translateY(-3px);
+        }
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-accent-color);
+            border-color: var(--primary-accent-color);
+        }
+        .btn-secondary:hover {
+            background-color: var(--primary-accent-color);
+            color: var(--bg-color);
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.2);
+        }
+
+        /* --- Header Navigation --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(10, 15, 20, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            border-bottom: 1px solid var(--secondary-accent-color);
+            transition: top 0.3s;
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-color-primary);
+            text-decoration: none;
+        }
+        .logo span { color: var(--primary-accent-color); }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+        nav a {
+            color: var(--text-color-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color var(--transition-speed);
+            padding: 5px 0;
+        }
+        nav a:hover, nav a.active {
+            color: var(--primary-accent-color);
+            border-bottom: 2px solid var(--primary-accent-color);
+        }
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-color-primary);
+            cursor: pointer;
+        }
+
+        /* --- Page Specific Hero/Title Section --- */
+        .page-header-section {
+            padding-top: 120px;
+            padding-bottom: 60px;
+            text-align: center;
+            background-color: var(--card-bg-color);
+        }
+        .page-header-section .page-subtitle {
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            color: var(--text-color-secondary);
+            font-family: var(--font-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* --- Blog Page Content Styles --- */
+        #blog-page-main-content {
+            padding: 60px 0;
+        }
+        .blog-layout-container {
+            display: grid;
+            grid-template-columns: 1fr; /* Default single column for mobile */
+            gap: 50px;
+        }
+
+        @media (min-width: 992px) { /* Two columns for larger screens: main content and sidebar */
+            .blog-layout-container {
+                grid-template-columns: 2.5fr 1fr; /* Adjust ratio as needed */
+            }
+        }
+
+        .blog-posts-area {
+            /* Styles for the area containing multiple posts */
+        }
+
+        .blog-post-card {
+            background-color: var(--card-bg-color);
+            border-radius: 12px;
+            border: 1px solid var(--secondary-accent-color);
+            margin-bottom: 40px; /* Space between posts */
+            overflow: hidden;
+            text-align: left;
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+        }
+        .blog-post-card:hover {
+             transform: translateY(-5px);
+             box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .blog-post-image-placeholder {
+            height: 280px;
+            background-color: var(--secondary-accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color-secondary);
+            font-family: var(--font-secondary);
+        }
+        .blog-post-image-actual { /* Use for actual <img> */
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+        }
+        .blog-post-content {
+            padding: 30px;
+        }
+        .blog-post-content h3 { /* Post title */
+            font-size: 1.8rem;
+            color: var(--primary-accent-color);
+            margin-bottom: 10px;
+        }
+        .blog-post-content h3 a {
+            color: inherit;
+            text-decoration: none;
+            transition: color var(--transition-speed);
+        }
+        .blog-post-content h3 a:hover {
+            color: var(--primary-accent-hover);
+        }
+        .blog-post-meta {
+            font-size: 0.85rem;
+            color: var(--text-color-secondary);
+            margin-bottom: 15px;
+            font-family: var(--font-secondary);
+        }
+        .blog-post-meta span {
+            margin-right: 15px;
+        }
+        .blog-post-excerpt p {
+            margin-bottom: 20px;
+            font-size: 1rem;
+            text-align: left;
+        }
+        .blog-read-more {
+            display: inline-block;
+            color: var(--primary-accent-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .blog-read-more:hover {
+            text-decoration: underline;
+            color: var(--primary-accent-hover);
+        }
+
+        /* Sidebar Styles */
+        .blog-sidebar {
+            padding-top: 20px; /* Align with content if needed */
+        }
+        .sidebar-widget {
+            background-color: var(--card-bg-color);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid var(--secondary-accent-color);
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        .sidebar-widget h4 { /* Widget title */
+            font-size: 1.3rem;
+            color: var(--primary-accent-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--secondary-accent-color);
+            font-family: var(--font-secondary);
+        }
+        .sidebar-widget ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .sidebar-widget ul li {
+            margin-bottom: 10px;
+        }
+        .sidebar-widget ul li a {
+            color: var(--text-color-secondary);
+            text-decoration: none;
+            transition: color var(--transition-speed);
+        }
+        .sidebar-widget ul li a:hover {
+            color: var(--primary-accent-color);
+        }
+
+        /* Newsletter CTA in Sidebar */
+        .newsletter-cta-widget p {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .newsletter-cta-widget input[type="email"] {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            color: var(--text-color-primary);
+            margin-bottom: 15px;
+            font-family: var(--font-primary);
+        }
+        .newsletter-cta-widget .btn { /* Ensure button spans width or styles nicely */
+            width: 100%;
+        }
+
+        /* Featured Article (Special Styling) */
+        .featured-article-card {
+            margin-bottom: 50px; /* More space for featured */
+            background-color: var(--secondary-accent-color); /* Distinct background */
+        }
+        .featured-article-card .blog-post-content h3 {
+             font-size: 2rem; /* Larger title */
+        }
+
+
+        /* --- Footer --- */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid var(--secondary-accent-color);
+        }
+        .copyright {
+            font-size: 0.9rem;
+            color: var(--text-color-secondary);
+            margin-top: 20px;
+        }
+
+        /* --- Scroll to Top Button --- */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary-accent-color);
+            color: var(--bg-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity var(--transition-speed), visibility var(--transition-speed), transform var(--transition-speed);
+            z-index: 999;
+            box-shadow: 0 0 15px var(--primary-accent-color);
+        }
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .scroll-to-top:hover {
+            background-color: var(--primary-accent-hover);
+            transform: scale(1.1) translateY(0);
+        }
+
+        /* --- Animation Classes for JS --- */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Responsive Design Adjustments --- */
+        @media (max-width: 991px) { /* Breakpoint before sidebar stacks */
+            .blog-layout-container {
+                grid-template-columns: 1fr; /* Stack main content and sidebar */
+            }
+            .blog-sidebar {
+                margin-top: 40px; /* Add space when stacked */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 20px;
+            }
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--card-bg-color);
+                padding: 20px 0;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+            }
+            nav ul.active {
+                display: flex;
+            }
+            nav ul li {
+                text-align: center;
+                margin: 10px 0;
+            }
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header id="main-header">
+        <div class="header-container">
+            <a href="index.html" class="logo">REYAD<span>.</span></a>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+            <nav>
+                <ul id="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header-section fade-in">
+            <div class="container">
+                <h1 class="page-title">My Blog</h1>
+                <p class="page-subtitle">Insights, tutorials, and updates from the world of web development & SEO.</p>
+            </div>
+        </section>
+
+        <section id="blog-page-main-content">
+            <div class="container">
+                <div class="blog-layout-container">
+                    <div class="blog-posts-area">
+                        <h2 class="section-title fade-in" style="text-align:left; margin-bottom:30px;">Articles</h2>
+
+                        <!-- Featured Article -->
+                        <article class="blog-post-card featured-article-card fade-in">
+                            <!-- <img src="path/to/featured-image.jpg" alt="Featured Article Image" class="blog-post-image-actual"> -->
+                            <div class="blog-post-image-placeholder">Featured Article Image</div>
+                            <div class="blog-post-content">
+                                <h3><a href="#">Why Speed Matters for SEO in 2025</a></h3>
+                                <div class="blog-post-meta">
+                                    <span>📅 June 5, 2025</span>
+                                    <span>👤 Reyad</span>
+                                    <span>🏷️ SEO, Performance</span>
+                                </div>
+                                <div class="blog-post-excerpt">
+                                    <p>Your website load time could be the difference between page 1 and page 5 on Google. Discover the latest data and techniques to ensure your site is lightning fast...</p>
+                                </div>
+                                <a href="#" class="blog-read-more">Read Full Article &rarr;</a>
+                            </div>
+                        </article>
+
+                        <!-- Latest Posts -->
+                        <h3 class="section-title fade-in" style="text-align:left; font-size: 1.8rem; margin-top: 50px; margin-bottom:30px;">Latest Posts</h3>
+                        
+                        <article class="blog-post-card fade-in">
+                            <div class="blog-post-image-placeholder">Post Image 1</div>
+                            <div class="blog-post-content">
+                                <h3><a href="#">Best WordPress SEO Plugins (Tested 2025)</a></h3>
+                                <div class="blog-post-meta">
+                                    <span>📅 May 28, 2025</span>
+                                    <span>👤 Reyad</span>
+                                    <span>🏷️ WordPress, SEO, Plugins</span>
+                                </div>
+                                <div class="blog-post-excerpt">
+                                    <p>Navigating the world of SEO plugins can be daunting. I've tested the top contenders for 2025 to help you choose the best for your WordPress site...</p>
+                                </div>
+                                <a href="#" class="blog-read-more">Read More &rarr;</a>
+                            </div>
+                        </article>
+
+                        <article class="blog-post-card fade-in">
+                            <div class="blog-post-image-placeholder">Post Image 2</div>
+                            <div class="blog-post-content">
+                                <h3><a href="#">My WooCommerce Checklist for New Stores</a></h3>
+                                <div class="blog-post-meta">
+                                    <span>📅 May 15, 2025</span>
+                                    <span>👤 Reyad</span>
+                                    <span>🏷️ WooCommerce, eCommerce</span>
+                                </div>
+                                <div class="blog-post-excerpt">
+                                    <p>Launching a new WooCommerce store? Don't miss these crucial steps to ensure a smooth launch and a foundation for success...</p>
+                                </div>
+                                <a href="#" class="blog-read-more">Read More &rarr;</a>
+                            </div>
+                        </article>
+
+                        <article class="blog-post-card fade-in">
+                            <div class="blog-post-image-placeholder">Post Image 3</div>
+                            <div class="blog-post-content">
+                                <h3><a href="#">How I Build Sites with Next.js + WordPress</a></h3>
+                                <div class="blog-post-meta">
+                                    <span>📅 April 30, 2025</span>
+                                    <span>👤 Reyad</span>
+                                    <span>🏷️ Next.js, WordPress, Headless</span>
+                                </div>
+                                <div class="blog-post-excerpt">
+                                    <p>Combining the power of Next.js for the frontend with WordPress as a headless CMS offers incredible flexibility and performance. Here's my approach...</p>
+                                </div>
+                                <a href="#" class="blog-read-more">Read More &rarr;</a>
+                            </div>
+                        </article>
+                        <!-- Add more posts or pagination here -->
+                    </div>
+
+                    <aside class="blog-sidebar">
+                        <div class="sidebar-widget fade-in">
+                            <h4>Categories</h4>
+                            <ul>
+                                <li><a href="#">SEO Tips</a> (5)</li>
+                                <li><a href="#">WordPress Development</a> (8)</li>
+                                <li><a href="#">WooCommerce</a> (4)</li>
+                                <li><a href="#">Hosting & Performance</a> (3)</li>
+                                <li><a href="#">Next.js & React</a> (2)</li>
+                            </ul>
+                        </div>
+
+                        <div class="sidebar-widget fade-in">
+                            <h4>Popular Articles</h4>
+                            <ul>
+                                <!-- Placeholder - To be populated once traffic comes in -->
+                                <li><a href="#">(Popular Post 1 Title)</a></li>
+                                <li><a href="#">(Popular Post 2 Title)</a></li>
+                                <li><a href="#">(Popular Post 3 Title)</a></li>
+                            </ul>
+                            <p style="font-size:0.9em; color: var(--text-color-secondary); margin-top:10px;">(Once traffic comes in, highlight top-performing posts here.)</p>
+                        </div>
+                        
+                        <div class="sidebar-widget newsletter-cta-widget fade-in">
+                            <h4>Newsletter</h4>
+                            <p>Want SEO tips and web tricks in your inbox? Subscribe for updates and free tutorials!</p>
+                            <form action="#" method="post">
+                                <input type="email" name="email" placeholder="Enter your email" required>
+                                <button type="submit" class="btn btn-primary">Subscribe</button>
+                            </form>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <p class="copyright">&copy; <span id="currentYear"></span> Reyad. All Rights Reserved. Built with passion.</p>
+        </div>
+    </footer>
+
+    <a href="#" class="scroll-to-top" aria-label="Scroll to top">&#8679;</a>
+
+    <script>
+        // NOTE FOR MULTI-PAGE SITES: 
+        // This <script> block can also be in an external script.js file.
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Smooth Scroll for on-page # links ---
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href.length > 1 && document.querySelector(href)) { 
+                        e.preventDefault();
+                        document.querySelector(href).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    } else if (href === "#") {
+                         e.preventDefault();
+                         window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // --- Active Nav Link Highlighting ---
+            const navLinks = document.querySelectorAll('#nav-links a');
+            const currentPage = window.location.pathname.split("/").pop() || "index.html"; 
+            navLinks.forEach(link => {
+                const linkPage = link.getAttribute('href').split("/").pop();
+                if (linkPage === currentPage) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+
+            // --- Fade-in Elements on Scroll ---
+            const fadeInElements = document.querySelectorAll('.fade-in');
+            if (typeof IntersectionObserver !== 'undefined') {
+                const observerOptions = {
+                    root: null,
+                    rootMargin: '0px',
+                    threshold: 0.1
+                };
+                const observer = new IntersectionObserver((entries, observerRef) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observerRef.unobserve(entry.target);
+                        }
+                    });
+                }, observerOptions);
+                fadeInElements.forEach(el => {
+                    observer.observe(el);
+                });
+            } else {
+                fadeInElements.forEach(el => el.classList.add('is-visible'));
+            }
+
+            // --- Scroll to Top Button Visibility ---
+            const scrollToTopBtn = document.querySelector('.scroll-to-top');
+            if (scrollToTopBtn) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 300) {
+                        scrollToTopBtn.classList.add('visible');
+                    } else {
+                        scrollToTopBtn.classList.remove('visible');
+                    }
+                });
+            }
+
+            // --- Sticky Header Hide/Show on Scroll ---
+            let lastScrollTop = 0;
+            const header = document.getElementById('main-header');
+            if (header) {
+                window.addEventListener('scroll', function() {
+                    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight + 50) {
+                        header.style.top = `-${header.offsetHeight}px`;
+                    } else {
+                        header.style.top = '0';
+                    }
+                    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+                });
+            }
+
+            // --- Mobile Menu Toggle ---
+            const menuToggle = document.getElementById('menu-toggle');
+            const navLinksUl = document.getElementById('nav-links');
+            if(menuToggle && navLinksUl) {
+                menuToggle.addEventListener('click', () => {
+                    navLinksUl.classList.toggle('active');
+                    const isExpanded = navLinksUl.classList.contains('active');
+                    menuToggle.setAttribute('aria-expanded', isExpanded);
+                    menuToggle.innerHTML = isExpanded ? '&times;' : '&#9776;'; 
+                });
+                navLinksUl.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (navLinksUl.classList.contains('active')) {
+                            navLinksUl.classList.remove('active');
+                            menuToggle.setAttribute('aria-expanded', 'false');
+                            menuToggle.innerHTML = '&#9776;';
+                        }
+                    });
+                });
+            }
+
+            // --- Update Copyright Year ---
+            const currentYearSpan = document.getElementById('currentYear');
+            if (currentYearSpan) {
+                currentYearSpan.textContent = new Date().getFullYear();
+            }
+        });
+    </script>
+</body>
+</html>
